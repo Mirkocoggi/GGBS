@@ -1,0 +1,10 @@
+----
+Assert() checks:       OFF
+        verbose:        1
+----
+Loading reference graph... Added reverse complement... done in 0.162944s.
+Loading queries... done in 0.000861s.
+Contructing trie... new_edges.size(): 2147483648
+bad_alloc caught: std::bad_alloc
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc

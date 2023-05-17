@@ -1,0 +1,5 @@
+/bin/bash: line 1:     8 Aborted                 (core dumped) release/astarix align-optimal -a astar-seeds -g input_data/input_data/benchmark_input/b_cov.gfa -q input_data/read2.fa --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/out_astarix_cov.log 2>&1
+
+real	75m1.364s
+user	74m41.411s
+sys	0m18.952s
