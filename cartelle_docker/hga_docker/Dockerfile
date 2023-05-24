@@ -8,10 +8,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get install -y libxml2 
 RUN apt-get install -y git
 RUN apt-get install -y cmake
+RUN apt-get install -y wget
 RUN apt-get update && apt-get install -y g++
 
 # Scarica e installa CUDA
-COPY cuda_11.8.0_520.61.05_linux.run .
+RUN wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda_11.8.0_520.61.05_linux.run
+#COPY cuda_11.8.0_520.61.05_linux.run .
 RUN sh cuda_11.8.0_520.61.05_linux.run --silent --toolkit --override
 
 # Imposta le variabili d'ambiente necessarie per l'utilizzo di CUDA
