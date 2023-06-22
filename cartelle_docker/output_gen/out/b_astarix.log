@@ -1,0 +1,7 @@
+----
+Assert() checks:       OFF
+        verbose:        1
+----
+Loading reference graph... Added reverse complement... done in 0.269861s.
+Loading queries... done in 0.020648s.
+Contructing trie... 

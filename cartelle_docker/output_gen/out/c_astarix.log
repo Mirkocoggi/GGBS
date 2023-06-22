@@ -2,4 +2,25 @@
 Assert() checks:       OFF
         verbose:        1
 ----
-Loading reference graph... 
+Loading reference graph... Added reverse complement... done in 1.04629s.
+Loading queries... done in 0.011565s.
+Contructing trie... done in 6.70511s.
+Initializing A* heuristic... done in 3.9e-05s.
+
+ == General parameters and optimizations == 
+             Alignment algo: astar-seeds
+                 Edit costs: 0, 1, 1, 1 (match, subst, ins, del)
+              Greedy match?: true
+                    Threads: 1
+
+ == A* parameters ==
+          seed length: 10 bp
+     skip near crumbs: 1
+
+ == Data ==
+         Original reference: 4888880 nodes, 4888314 edges
+                       Trie: 1346245 nodes, 11111535 edges, depth=11
+  Reference+ReverseRef+Trie: 11124005 nodes, 20888163 edges, density: 0
+                      Reads: 10000 x 99bp, coverage: 0.20252x
+            Avg phred value: 0.00000%
+

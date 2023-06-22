@@ -1,0 +1,5 @@
+/bin/bash: line 1:     7 Segmentation fault      (core dumped) release/astarix align-optimal -a astar-seeds -g input_data/input_data/grafi_umani/C490.gfa -q input_data/input_data/reads_umane/C4-96.fa --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/e_astarix.log 2>&1
+
+real	0m4.696s
+user	0m0.013s
+sys	0m0.013s

@@ -1,0 +1,5 @@
+/bin/bash: line 1:     7 Killed                  ./valign -g input_data/input_data/grafi_umani/C490.gfa -v input_data/input_data/grafi_umani/C490.gfa.fvs -x input_data/input_data/reads_umane/C4-96.txt -o output/out/e_valign.log > /dev/null 2>&1
+
+real	117m23.889s
+user	80m42.082s
+sys	6m42.053s

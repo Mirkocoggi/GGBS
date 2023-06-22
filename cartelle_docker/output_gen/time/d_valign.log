@@ -1,0 +1,5 @@
+/bin/bash: line 1:     6 Killed                  ./valign -g input_data/input_data/benchmark_input/d_lievito.gfa -v input_data/input_data/benchmark_input/d_lievito.gfa.fvs -x input_data/input_data/benchmark_input/lievito.txt -o output/out/d_valign.log > /dev/null 2>&1
+
+real	238m28.405s
+user	73m45.854s
+sys	5m55.802s
