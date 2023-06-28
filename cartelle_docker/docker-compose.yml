@@ -1,209 +1,221 @@
 version: '3.2'
 services:
-  service1:
-    stdin_open: true 
-    tty: true
-    build:
-      context: ./astarix_docker
-      dockerfile: Dockerfile
-    volumes:
-      - type: bind
-        source: ./output_gen
-        target: /astarix/output
-      - type: bind
-        source: ./shared_input
-        target: /astarix/input_data
-    command: 
-      - /bin/bash 
-      - -c 
-      - |
-        { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/grafi_umani/C490.gfa -q input_data/input_data/reads_umane/C4-96.fa --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/e_astarix.log 2>&1 ; }  2> output/time/e_astarix.log
-      # { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/benchmark_input/b_cov.gfa -q input_data/input_data/SARS-CoV2.fa --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/b_astarix.log 2>&1 ; }  2> output/time/b_astarix.log
-      # { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/virus40k.blunt.gfa -q input_data/t1.fa --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/c_astarix.log 2>&1 ; }  2> output/time/c_astarix.log
-
-  service2:
-    stdin_open: true 
-    tty: true
-    build:
-      context: ./GraphAligner_docker
-      dockerfile: Dockerfile
-    volumes:
-      - type: bind
-        source: ./output_gen
-        target: /GraphAligner/output
-      - type: bind
-        source: ./shared_input
-        target: /GraphAligner/input_data
-    command: 
-      - /bin/bash 
-      - -c 
-      - |
-        { time GraphAligner -g input_data/input_data/grafi_umani/C490.gfa -f input_data/input_data/reads_umane/C4-96.fa -a output/out/e_ga.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/e_ga.log 
-
-      # { time GraphAligner -g input_data/input_data/benchmark_input/a_ebola.gfa -f input_data/read2.fa -a output/out/a_GA.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/a_GA.log 
-      # { time GraphAligner -g input_data/input_data/benchmark_input/b_cov.gfa -f input_data/input_data/SARS-CoV2.fa -a output/out/b_GA.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/b_GA.log 
-      # { time GraphAligner -g input_data/input_data/grafi_umani/C490.gfa -f input_data/input_data/reads_umane/C4-96.fa -a output/out/c_GA.gaf -x vg --max-cluster-extend -1 --seeds-mum-count -1 --tangle-effort -1 > /dev/null 2>&1 ; } 2> output/time/c_GA.log       
-      # { time GraphAligner -g input_data/input_data/virus40k_original.gfa -f input_data/t1.fa -a output/out/d_GA.gaf -x dbg > output/out/GA_virus_dbg_as_x.log 2>&1 ; } 2> output/time/d_GA.log 
-
-
-  # service3:
+  # service1:
   #   stdin_open: true 
   #   tty: true
-  #   image: nvidia/cuda:11.8.0-base-ubuntu20.04
-  #   # command: nvidia-smi
-  #   deploy:
-  #     resources:
-  #       reservations:
-  #         devices:
-  #           - driver: nvidia
-  #             count: 1
-  #             capabilities: [gpu]
   #   build:
-  #     context: ./hga_docker
+  #     context: ./astarix_docker
   #     dockerfile: Dockerfile
   #   volumes:
   #     - type: bind
   #       source: ./output_gen
-  #       target: /hga/output
+  #       target: /astarix/output
   #     - type: bind
   #       source: ./shared_input
-  #       target: /hga/input_data
-  #   # command: /bin/bash -c "make all"
-  #   command: /bin/bash -c "{ time ./bin/hga -g input_data/input_data/benchmark_input/a_ebola.gfa -r input_data/read2.fa &> output/out/out_hga.log 2>&1 ; } 2> output/time/out_time_hga.log"
+  #       target: /astarix/input_data
+  #   command: 
+  #     - /bin/bash 
+  #     - -c 
+  #     - |
+  #       { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/benchmark_input/a_ebola_0M.gfa -q input_data/input_data/benchmark_input/ebola.fa -t 1 --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/a_astarix.log 2>&1 ; }  2> output/time/a_astarix.log
+  #       { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/benchmark_input/d_lievito.gfa -q input_data/input_data/benchmark_input/lievito.fa -t 1 --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/d_astarix.log 2>&1 ; }  2> output/time/d_astarix.log
+  #       { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/benchmark_input/c_Ecoli_K12_blunt.gfa -q input_data/input_data/benchmark_input/ecoli.fa -t 1 --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/c_astarix.log 2>&1 ; }  2> output/time/c_astarix.log
+  #       { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/grafi_umani/C490.gfa -q input_data/input_data/reads_umane/C4-96.fa -t 1 --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/e_astarix.log 2>&1 ; }  2> output/time/e_astarix.log
+  #       { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/grafi_umani/MHC-57.gfa -q input_data/input_data/reads_umane/MHC-57.fa -t 1 --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/f_astarix.log 2>&1 ; }  2> output/time/f_astarix.log
 
-  service4:
-    stdin_open: true 
-    tty: true
-    build:
-      context: ./gwfa_docker
-      dockerfile: Dockerfile
-    volumes:
-      - type: bind
-        source: ./output_gen
-        target: /usr/local/gwfa/output
-      - type: bind
-        source: ./shared_input
-        target: /usr/local/gwfa/input_data
-    command: 
-      - /bin/bash 
-      - -c 
-      - |
-        { time ./gwf-test input_data/input_data/grafi_umani/C490.gfa input_data/input_data/reads_umane/C4-96.fa > output/out/e_gwfa.log 2>&1 ; } 2> output/time/e_gwfa.log
+      # { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/benchmark_input/b_cov.gfa -q input_data/input_data/SARS-CoV2.fa --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/b_astarix.log 2>&1 ; }  2> output/time/b_astarix.log
+      # { time release/astarix align-optimal -a astar-seeds -g input_data/input_data/virus40k.blunt.gfa -q input_data/t1.fa --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o output/ > output/out/c_astarix.log 2>&1 ; }  2> output/time/c_astarix.log
+
+  # service2:
+  #   stdin_open: true 
+  #   tty: true
+  #   build:
+  #     context: ./GraphAligner_docker
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - type: bind
+  #       source: ./output_gen
+  #       target: /GraphAligner/output
+  #     - type: bind
+  #       source: ./shared_input
+  #       target: /GraphAligner/input_data
+  #   command: 
+  #     - /bin/bash 
+  #     - -c 
+  #     - |
+  #       { time GraphAligner -g input_data/input_data/grafi_umani/MHC-57.gfa -f input_data/input_data/reads_umane/MHC_full.fa -a output/out/f_ga_full.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/f_ga_full.log 
+
+
+
+      # { time GraphAligner -g input_data/input_data/benchmark_input/c_Ecoli_K12_blunt.gfa -f input_data/input_data/benchmark_input/ecoli.fa -a output/out/c_ga.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/c_ga.log 
+      # { time GraphAligner -g input_data/input_data/benchmark_input/a_ebola_0M.gfa -f input_data/input_data/benchmark_input/ebola.fa -a output/out/a_ga.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/a_ga.log 
+      # { time GraphAligner -g input_data/input_data/benchmark_input/b_cov.gfa -f input_data/input_data/benchmark_input/cov.fa -a output/out/b_ga.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/b_ga.log 
+      # { time GraphAligner -g input_data/input_data/grafi_umani/C490.gfa -f input_data/input_data/reads_umane/C4-96.fa -a output/out/e_ga.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/e_ga.log 
+      # { time GraphAligner -g input_data/input_data/benchmark_input/d_lievito.gfa -f input_data/input_data/benchmark_input/lievito.fa -a output/out/d_ga.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/d_ga.log 
+      # { time GraphAligner -g input_data/input_data/grafi_umani/MHC-57.gfa -f input_data/input_data/reads_umane/MHC-57.fa -a output/out/f_ga.gaf -x vg > /dev/null 2>&1 ; } 2> output/time/f_ga.log 
+        
+      # { time GraphAligner -g input_data/input_data/grafi_umani/C490.gfa -f input_data/input_data/reads_umane/C4-96.fa -a output/out/c_GA.gaf -x vg --max-cluster-extend -1 --seeds-mum-count -1 --tangle-effort -1 > /dev/null 2>&1 ; } 2> output/time/c_GA.log       
+      # { time GraphAligner -g input_data/input_data/virus40k_original.gfa -f input_data/t1.fa -a output/out/d_GA.gaf -x dbg > output/out/GA_virus_dbg_as_x.log 2>&1 ; } 2> output/time/d_GA.log 
+
+
+#   # service3:
+#   #   stdin_open: true 
+#   #   tty: true
+#   #   image: nvidia/cuda:11.8.0-base-ubuntu20.04
+#   #   # command: nvidia-smi
+#   #   deploy:
+#   #     resources:
+#   #       reservations:
+#   #         devices:
+#   #           - driver: nvidia
+#   #             count: 1
+#   #             capabilities: [gpu]
+#   #   build:
+#   #     context: ./hga_docker
+#   #     dockerfile: Dockerfile
+#   #   volumes:
+#   #     - type: bind
+#   #       source: ./output_gen
+#   #       target: /hga/output
+#   #     - type: bind
+#   #       source: ./shared_input
+#   #       target: /hga/input_data
+#   #   # command: /bin/bash -c "make all"
+#   #   command: /bin/bash -c "{ time ./bin/hga -g input_data/input_data/benchmark_input/a_ebola.gfa -r input_data/read2.fa &> output/out/out_hga.log 2>&1 ; } 2> output/time/out_time_hga.log"
+
+  # service4:
+  #   stdin_open: true 
+  #   tty: true
+  #   build:
+  #     context: ./gwfa_docker
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - type: bind
+  #       source: ./output_gen
+  #       target: /usr/local/gwfa/output
+  #     - type: bind
+  #       source: ./shared_input
+  #       target: /usr/local/gwfa/input_data
+  #   command: 
+  #     - /bin/bash 
+  #     - -c 
+  #     - |
+  #       { time ./gwf-test input_data/input_data/grafi_umani/MHC-57.gfa input_data/input_data/reads_umane/MHC-57.fa > output/out/f_gwfa.log 2>&1 ; } 2> output/time/f_gwfa.log
       # { time ./gwf-test input_data/input_data/benchmark_input/b_cov.gfa input_data/input_data/SARS-CoV2.fa > output/out/b_gwfa.log 2>&1 ; } 2> output/time/b_gwfa.log
 
-  service5:
-    stdin_open: true 
-    tty: true
-    build:
-      context: ./SGA_docker
-      dockerfile: Dockerfile
-    volumes:
-      - type: bind
-        source: ./output_gen
-        target: /SGA/build/output
-      - type: bind
-        source: ./shared_input
-        target: /SGA/build/input_data
-    command: 
-      - /bin/bash 
-      - -c 
-      - |
-        { time ./apps/sga_example input_data/input_data/grafi_umani/C490.gfa input_data/input_data/reads_umane/C4-96.fa > output/out/e_sga.log 2>&1 ; } 2> output/time/e_sga.log
-    # { time ./apps/sga_example input_data/input_data/benchmark_input/b_cov.gfa input_data/input_data/SARS-CoV2.fa > output/out/b_sga.log 2>&1 ; } 2> output/time/b_sga.log
- 
-
-  service6:
-    stdin_open: true 
-    tty: true
-    build:
-      context: ./v-align_docker
-      dockerfile: Dockerfile
-    volumes:
-      - type: bind
-        source: ./output_gen
-        target: /V-ALIGN/output
-      - type: bind
-        source: ./shared_input
-        target: /V-ALIGN/input_data
-    command:  
-      - /bin/bash 
-      - -c 
-      - |
-        { time ./valign -g input_data/input_data/grafi_umani/C490.gfa -v input_data/input_data/grafi_umani/C490.gfa.fvs -x input_data/input_data/reads_umane/C4-96.txt -o output/out/e_valign.log > /dev/null 2>&1 ; } 2> output/time/e_valign.log
-    # { time ./valign -g input_data/input_data/benchmark_input/b_cov.gfa -v input_data/input_data/benchmark_input/b_cov.gfa.fvs -x input_data/input_data/SARS-CoV2.txt -o output/out/b_valign.log > /dev/null 2>&1 ; } 2> output/time/b_valign.log
-  
-#   service7:
+#   service5:
 #     stdin_open: true 
 #     tty: true
 #     build:
-#       context: ./vg_docker
+#       context: ./SGA_docker
 #       dockerfile: Dockerfile
 #     volumes:
 #       - type: bind
 #         source: ./output_gen
-#         target: /vg/output
+#         target: /SGA/build/output
 #       - type: bind
 #         source: ./shared_input
-#         target: /vg/input_data
+#         target: /SGA/build/input_data
 #     command: 
 #       - /bin/bash 
 #       - -c 
 #       - |
-#        { time vg map -F input_data/input_data/benchmark_input/ebola.fa -x input_data/a_ebola_0M256.xg -g input_data/a_ebola_0M256.gcsa --refpos-table --mismatch 1 --gap-open 1 --gap-extend 1 --drop-full-l-bonus -K -D -c 0 > output/out/a_vg.log 2>&1 ; } 2> output/time/a_vg.log
-# #    command: /bin/bash -c "{ time vg map -F input_data/t1.fa -x input_data/ebola.xg -g input_data/ebola.gcsa --gaf > output/out/out_vg.gaf 2>&1 ; } 2> output/time/out_time_vg.log"
+#         { time ./apps/sga_example input_data/input_data/benchmark_input/c_Ecoli_K12_blunt.gfa input_data/input_data/benchmark_input/ecoli.fa > output/out/c_sga.log 2>&1 ; } 2> output/time/c_sga.log
+#     # { time ./apps/sga_example input_data/input_data/benchmark_input/b_cov.gfa input_data/input_data/SARS-CoV2.fa > output/out/b_sga.log 2>&1 ; } 2> output/time/b_sga.log
+ 
 
-  # service8:
-  #     stdin_open: true 
-  #     tty: true
-  #     build:
-  #       context: ./metagraph_docker
-  #       dockerfile: Dockerfile
-  #     volumes:
-  #       - type: bind
-  #         source: ./output_gen
-  #         target: /opt/metagraph/metagraph/build/output
-  #       - type: bind
-  #         source: ./shared_input
-  #         target: /opt/metagraph/metagraph/build/input_data
-  #     command: 
-  #       - /bin/bash 
-  #       - -c 
-  #       - |
-  #         { time ./metagraph align -v -i input_data/input_data/virus40k.dbg input_data/input_data/virus40k.hifi.fa > output/out/out_metagraph.log 2>&1 ; } 2> output/out_time_metagraph.log
-  #     # command: /bin/bash -c "./metagraph align -v -i input_data/input_data/virus40k.dbg input_data/input_data/virus40k.hifi.fa"
-      # command:
-      #   - /bin/bash 
-      #   - -c 
-      #   - |
-      #     pwd
-      #     ls
-      #     cd metagraph
-      #     pwd
-      #     ls
-      #     cd build
-      #     pwd
-      #     ls
-      #     cd input_data
-      #     pwd
-      #     ls
+#   service6:
+#     stdin_open: true 
+#     tty: true
+#     build:
+#       context: ./v-align_docker
+#       dockerfile: Dockerfile
+#     volumes:
+#       - type: bind
+#         source: ./output_gen
+#         target: /V-ALIGN/output
+#       - type: bind
+#         source: ./shared_input
+#         target: /V-ALIGN/input_data
+#     command:  
+#       - /bin/bash 
+#       - -c 
+#       - |
+#         { time ./valign -g input_data/input_data/benchmark_input/c_Ecoli_K12_blunt.gfa -v input_data/input_data/benchmark_input/c_Ecoli_K12_blunt.gfa.fvs -x input_data/input_data/benchmark_input/ecoli.txt -o output/out/c_valign.log > /dev/null 2>&1 ; } 2> output/time/c_valign.log
+#     # { time ./valign -g input_data/input_data/benchmark_input/b_cov.gfa -v input_data/input_data/benchmark_input/b_cov.gfa.fvs -x input_data/input_data/SARS-CoV2.txt -o output/out/b_valign.log > /dev/null 2>&1 ; } 2> output/time/b_valign.log
+  
+  service7:
+    stdin_open: true 
+    tty: true
+    build:
+      context: ./vg_docker
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./output_gen
+        target: /vg/output
+      - type: bind
+        source: ./shared_input
+        target: /vg/input_data
+    command: 
+      - /bin/bash 
+      - -c 
+      - |
+       { time vg map -F input_data/input_data/benchmark_input/ebola.fa -x input_data/a_ebola_0M256.xg -g input_data/a_ebola_0M256.gcsa --refpos-table --mismatch 1 --gap-open 1 --gap-extend 1 --drop-full-l-bonus -K -D -c 0 > output/out/a_vg.log 2>&1 ; } 2> output/time/a_vg.log
+#    command: /bin/bash -c "{ time vg map -F input_data/t1.fa -x input_data/ebola.xg -g input_data/ebola.gcsa --gaf > output/out/out_vg.gaf 2>&1 ; } 2> output/time/out_time_vg.log"
+
+#   # service8:
+#   #     stdin_open: true 
+#   #     tty: true
+#   #     build:
+#   #       context: ./metagraph_docker
+#   #       dockerfile: Dockerfile
+#   #     volumes:
+#   #       - type: bind
+#   #         source: ./output_gen
+#   #         target: /opt/metagraph/metagraph/build/output
+#   #       - type: bind
+#   #         source: ./shared_input
+#   #         target: /opt/metagraph/metagraph/build/input_data
+#   #     command: 
+#   #       - /bin/bash 
+#   #       - -c 
+#   #       - |
+#   #         { time ./metagraph align -v -i input_data/input_data/virus40k.dbg input_data/input_data/virus40k.hifi.fa > output/out/out_metagraph.log 2>&1 ; } 2> output/out_time_metagraph.log
+#   #     # command: /bin/bash -c "./metagraph align -v -i input_data/input_data/virus40k.dbg input_data/input_data/virus40k.hifi.fa"
+#       # command:
+#       #   - /bin/bash 
+#       #   - -c 
+#       #   - |
+#       #     pwd
+#       #     ls
+#       #     cd metagraph
+#       #     pwd
+#       #     ls
+#       #     cd build
+#       #     pwd
+#       #     ls
+#       #     cd input_data
+#       #     pwd
+#       #     ls
 
 
-# command: /bin/bash -c "{ time ./metagraph align -v -i input_data/input_data/virus40k.dbg input_data/input_data/virus40k.hifi.fa > output/out/out_metagraph.log 2>&1 ; } 2> output/out_time_metagraph.log"
+# # command: /bin/bash -c "{ time ./metagraph align -v -i input_data/input_data/virus40k.dbg input_data/input_data/virus40k.hifi.fa > output/out/out_metagraph.log 2>&1 ; } 2> output/out_time_metagraph.log"
 
-#     command: /bin/bash -c "{ time vg map -F input_data/t1.fa -x input_data/ebola.xg -g input_data/ebola.gcsa --gaf > output/out/out_vg.gaf 2>&1 ; } 2> output/time/out_time_vg.log"
+# #     command: /bin/bash -c "{ time vg map -F input_data/t1.fa -x input_data/ebola.xg -g input_data/ebola.gcsa --gaf > output/out/out_vg.gaf 2>&1 ; } 2> output/time/out_time_vg.log"
 
-# https://drive.google.com/file/d/1Wb8NntDXTut-O_dnNmbPRL65kxJ_tXBS/view?usp=sharing
-# https://drive.google.com/file/d/1ktd3zUT--XLqRHU3kI6HNJuwAfefiN9j/view?usp=sharing
-# https://drive.google.com/file/d/1BS2iapbRUGsG5bauvEbbKhF3R_229awE/view?usp=sharing
-# https://drive.google.com/file/d/1p2KeQbGeGPlM_LC0-BDFyrzDBkJqaCQN/view?usp=sharing
+# # https://drive.google.com/file/d/1Wb8NntDXTut-O_dnNmbPRL65kxJ_tXBS/view?usp=sharing
+# # https://drive.google.com/file/d/1ktd3zUT--XLqRHU3kI6HNJuwAfefiN9j/view?usp=sharing
+# # https://drive.google.com/file/d/1BS2iapbRUGsG5bauvEbbKhF3R_229awE/view?usp=sharing
+# # https://drive.google.com/file/d/1p2KeQbGeGPlM_LC0-BDFyrzDBkJqaCQN/view?usp=sharing
 
-# volumes:
-#   shared_input:
-#     driver: local
-#     driver_opts:
-#       type: none
-#       device: /home/users/mirko.coggi/cartelle_docker/shared_input
-#       o: bind
+# # volumes:
+# #   shared_input:
+# #     driver: local
+# #     driver_opts:
+# #       type: none
+# #       device: /home/users/mirko.coggi/cartelle_docker/shared_input
+# #       o: bind
 
 
   

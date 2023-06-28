@@ -1,6 +1,6 @@
 # vertices: 51777, # edges: 107963
 Number of sequences: 10000.
-Loaded sequence batch successfully in 0.00683904s.
+Loaded sequence batch successfully in 0.00717306s.
 Sequence length: 102, alignment cost:0, forward num cells:83812, reverse num cells: 53251
 Sequence length: 101, alignment cost:0, forward num cells:53229, reverse num cells: 57548
 Sequence length: 141, alignment cost:0, forward num cells:53453, reverse num cells: 52864
@@ -10002,5 +10002,5 @@ Sequence length: 148, alignment cost:2, forward num cells:333139, reverse num ce
 Sequence length: 149, alignment cost:0, forward num cells:95008, reverse num cells: 100967
 Sequence length: 151, alignment cost:0, forward num cells:102196, reverse num cells: 120060
 Number of sequences: 0.
-Loaded sequence batch successfully in 2.59876e-05s.
-Mapped 10000 sequences in 5376.67s
+Loaded sequence batch successfully in 9.77516e-06s.
+Mapped 10000 sequences in 4231.08s

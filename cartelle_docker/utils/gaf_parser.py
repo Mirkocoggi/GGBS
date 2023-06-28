@@ -16,9 +16,9 @@ def calculate_score(cigar_str):
         total_score += num * score
     return total_score
 
-
-with open('output_gen/out/out_GA.gaf', 'r') as f_in:
-    with open('results/aln_GA.csv', 'w') as f_out:
+global_score = 0
+with open('output_gen/out/f_ga_full.gaf', 'r') as f_in:
+    with open('results/aln_ga.csv', 'w') as f_out:
         writer = csv.writer(f_out)
         writer.writerow(['read_id', 'read_length', 'offset', 'alignment_length', 'strand', 'query_name', 'query_length', 'query_start', 'query_end', 'target_start', 'target_end', 'quality_score', 'cigar', 'score'])
         for line in f_in:
@@ -32,11 +32,14 @@ with open('output_gen/out/out_GA.gaf', 'r') as f_in:
                 attribute += values[i] 
             last_string = values[-1].split('cg:Z:')[1]
             total_score = calculate_score(last_string)
+            global_score = global_score + total_score
             csv_values = values[:11]
             csv_values.append(attribute)
             csv_values.append(last_string)
             csv_values.append(total_score)
             writer.writerow(csv_values)
+
+print("total score: ", global_score) 
 
 
 

@@ -2,10 +2,10 @@
 Assert() checks:       OFF
         verbose:        1
 ----
-Loading reference graph... Added reverse complement... done in 0.004194s.
-Loading queries... done in 0.030324s.
-Contructing trie... done in 0.013503s.
-Initializing A* heuristic... done in 2.4e-05s.
+Loading reference graph... Added reverse complement... done in 0.002552s.
+Loading queries... done in 0.013035s.
+Contructing trie... done in 0.009831s.
+Initializing A* heuristic... done in 1.2e-05s.
 
  == General parameters and optimizations == 
              Alignment algo: astar-seeds
@@ -44,24 +44,24 @@ Total cost of aligned reads: 20421, 2.04210 per read, 2.06273% per letter
 
  == Performance ==
     Memory:                    measured | estimated
-                   total: 0.02341gb, 100% | -
-               reference: 0.00150gb, 6.38853% | 2.40970%
-                   reads: 0.00291gb, 12.43481% | 3.93904%
-                    trie: 0.00256gb, 10.93546% | 2.15137%
+                   total: 0.02331gb, 100% | -
+               reference: 0.00341gb, 14.61299% | 2.41956%
+                   reads: 0.00291gb, 12.48568% | 3.95515%
+                    trie: 0.00256gb, 10.99656% | 2.16017%
      equiv. classes opt.: 0.00000gb, 0.00000%
-          A*-memoization: 0.01334gb, 57.00782
+          A*-memoization: 0.01334gb, 57.24104
 
-   Total wall runtime:    11.12628s
-       reference loading: 0.00419s
-         queries loading: 0.03032s
-          construct trie: 0.01350s
-              precompute: 0.00002s
-       align (wall time): 10.94988s = 913.25184 reads/s = 90.41193 Kbp/s
+   Total wall runtime:    4.59996s
+       reference loading: 0.00255s
+         queries loading: 0.01303s
+          construct trie: 0.00983s
+              precompute: 0.00001s
+       align (wall time): 4.57282s = 2186.83518 reads/s = 216.49668 Kbp/s
 
-    Total align cpu time: 10.76025s = 929.34626 reads/s = 92.00528 Kbp/s
-     |          Preprocessing: 38.62376%
-     |               A* query: 22.96753%
-     |           greedy_match: 5.41543%
-     |                  other: 32.99328%
+    Total align cpu time: 4.57262s = 2186.92812 reads/s = 216.50588 Kbp/s
+     |          Preprocessing: 55.81113%
+     |               A* query: 14.83310%
+     |           greedy_match: 4.41361%
+     |                  other: 24.94216%
  DONE
 
