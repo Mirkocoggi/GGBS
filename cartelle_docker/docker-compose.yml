@@ -144,11 +144,31 @@ services:
 #         { time ./valign -g input_data/input_data/benchmark_input/c_Ecoli_K12_blunt.gfa -v input_data/input_data/benchmark_input/c_Ecoli_K12_blunt.gfa.fvs -x input_data/input_data/benchmark_input/ecoli.txt -o output/out/c_valign.log > /dev/null 2>&1 ; } 2> output/time/c_valign.log
 #     # { time ./valign -g input_data/input_data/benchmark_input/b_cov.gfa -v input_data/input_data/benchmark_input/b_cov.gfa.fvs -x input_data/input_data/SARS-CoV2.txt -o output/out/b_valign.log > /dev/null 2>&1 ; } 2> output/time/b_valign.log
   
+#   service7:
+#     stdin_open: true 
+#     tty: true
+#     build:
+#       context: ./vg_docker
+#       dockerfile: Dockerfile
+#     volumes:
+#       - type: bind
+#         source: ./output_gen
+#         target: /vg/output
+#       - type: bind
+#         source: ./shared_input
+#         target: /vg/input_data
+#     command: 
+#       - /bin/bash 
+#       - -c 
+#       - |
+#        { time vg map -F input_data/input_data/benchmark_input/ebola.fa -x input_data/a_ebola_0M256.xg -g input_data/a_ebola_0M256.gcsa --refpos-table --mismatch 1 --gap-open 1 --gap-extend 1 --drop-full-l-bonus -K -D -c 0 > output/out/a_vg.log 2>&1 ; } 2> output/time/a_vg.log
+# #    command: /bin/bash -c "{ time vg map -F input_data/t1.fa -x input_data/ebola.xg -g input_data/ebola.gcsa --gaf > output/out/out_vg.gaf 2>&1 ; } 2> output/time/out_time_vg.log"
+
   service7:
     stdin_open: true 
     tty: true
     build:
-      context: ./vg_docker
+      context: ./vg_new_docker
       dockerfile: Dockerfile
     volumes:
       - type: bind
