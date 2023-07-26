@@ -1,5 +1,5 @@
 # Genome Graphs Benchmark Suite - GGBS
-GGBS is the first implemented Benchmark Suite for sequence-to-graph alignment in the genomic analysis context. It includes multiple state-of-the-art tools and six different genome graph built with VG Toolkit[^1]
+GGBS is the first implemented Benchmark Suite for sequence-to-graph alignment in the genomic analysis context. It includes multiple state-of-the-art tools and six different genome graph built with VG Toolkit[^1].
 Run in `/cartelle_docker` with 
 ```
 docker compose up
