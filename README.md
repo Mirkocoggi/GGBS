@@ -1,5 +1,5 @@
 # Genome Graphs Benchmark Suite - GGBS
-GGBS is the first implemented Benchmark Suite for sequence-to-graph alignment in the genomic analysis context. It includes multiple state-of-the-art tools and six different genome graph built with VG Toolkit[^1]. Tools included are:
+GGBS is the first implemented Benchmark Suite for sequence-to-graph alignment in the genomic analysis context. It includes multiple state-of-the-art tools and six different genome graphs built with VG Toolkit[^1]. Tools included are:
 
 - Astarix [^2]
 - GraphAligner [^3]
@@ -15,7 +15,7 @@ GGBS is the first implemented Benchmark Suite for sequence-to-graph alignment in
 Docker >= 24.0
 
 ### Download and install
-First get the repo:
+First, get the repo:
 ```
 git clone https://github.com/Mirkocoggi/GGBS.git
 ```
@@ -31,7 +31,7 @@ cd cartelle_docker
 docker compose up
 ```
 ## Results Collection
-Results are uploaded in the `/output_gen` folder. They are divided in `/time` and `/out`, collecting times and results respectively.
+Results are uploaded in the `/output_gen` folder. They are divided into `/time` and `/out`, collecting times and output of the alignment, respectively.
 
 [^1]: E. Garrison, J. Sir ́en, A. M. Novak, G. Hickey, J. M. Eizenga, E. T. Dawson, W. Jones, S. Garg, C. Markello, M. F. Lin et al., “Variation graph toolkit improves read mapping by representing genetic variation in the reference,” Nature biotechnology, vol. 36, no. 9, pp. 875–879, 2018
 [^2]: P. Ivanov, B. Bichsel, and M. Vechev, “Fast and optimal sequence-to-graph alignment guided by seeds,” in International Conference on Research in Computational Molecular Biology. Springer, 2022, pp. 306–325
