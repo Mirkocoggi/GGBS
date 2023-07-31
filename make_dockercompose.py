@@ -89,17 +89,25 @@ def main():
 
 		# for each alignment experiment, add the respective command to docker-compose.yml
 		for al in ALIGNMENTS:
+			# create the results subfolder for the specific tool
+			RESULTS_SUBDIR = os.path.join(RESULTS_DIR, al)
+			try:
+				os.makedirs(RESULTS_SUBDIR)
+			except OSError as e:
+				raise
 			# retrieve the relative path of input data
 			dir_tmp = os.path.join(DATA_FOLDER, al)
-			graph = [f for f in os.listdir(os.path.join(dir_tmp, 'GRAPH'))][0]
+			graph = [f for f in os.listdir(os.path.join(dir_tmp, 'GRAPH')) if f.endswith('.gfa')][0]
 			graph_path = os.path.join(dir_tmp,'GRAPH', graph)
-			reads = [f for f in os.listdir(os.path.join(dir_tmp, 'READS'))][0]
+			reads = [f for f in os.listdir(os.path.join(dir_tmp, 'READS')) if 
+				(f.lower().endswith('.fa') or f.lower().endswith('.fq') or 
+				f.lower().endswith('.fasta') or f.lower().endswith('fastq'))][0]
 			reads_path = os.path.join(dir_tmp, 'READS', reads)
 			# set the output files' names and relative paths
 			output_name = graph.split('.gfa')[0] + '_alignments.gaf'
 			timing_name = graph.split('.gfa')[0] + '_time.log'
-			output_path = os.path.join(RESULTS_DIR, output_name)
-			timing_path = os.path.join(RESULTS_DIR, timing_name)
+			output_path = os.path.join(RESULTS_SUBDIR, output_name)
+			timing_path = os.path.join(RESULTS_SUBDIR, timing_name)
 
 			# add the command related to the alignment experiment
 			# we need specific cases for each tool, it can't be more standardized
@@ -116,7 +124,7 @@ def main():
 			elif tool == 'astarix':
 				command = command_tmp.format(GRAPH=graph_path, 
 												READS=reads_path,
-												OUT_DIR=RESULTS_DIR,
+												OUT_DIR=RESULTS_SUBDIR,
 												THREADS=1) # Currently, AStarix works only with 1 thread
 				command = COMMAND_TEMPLATE.format(COMMAND=command,
 													LOG='> ' + output_path.split('.gaf')[0] + '.log',
@@ -154,7 +162,6 @@ def main():
 				dot_graph_path = graph_path.split('.gfa')[0] + '.visual.dot'									
 				rm_command = f'        rm {dot_graph_path} {txt_reads_path} {index_path}'
 				file_tmp.write(convert_cmd + index_cmd + command + rm_command)
-
 
 			elif tool == 'vg':
 				out_name = output_path.split('_alignments.gaf')[0]
