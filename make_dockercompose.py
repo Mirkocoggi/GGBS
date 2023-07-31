@@ -160,7 +160,7 @@ def main():
 													LOG='> /dev/null',
 													TIMING=timing_path)
 				dot_graph_path = graph_path.split('.gfa')[0] + '.visual.dot'									
-				rm_command = f'        rm {dot_graph_path} {txt_reads_path} {index_path}'
+				rm_command = f'        rm {dot_graph_path} {txt_reads_path} {index_path}\n'
 				file_tmp.write(convert_cmd + index_cmd + command + rm_command)
 
 			elif tool == 'vg':
