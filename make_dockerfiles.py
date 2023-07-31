@@ -156,11 +156,14 @@ RUN mkdir input_data
 FROM gcc:latest
 
 RUN git clone https://github.com/tcsatc/V-ALIGN
-COPY ../../utils/fasta_to_txt.py ./V-ALIGN
-RUN ls
+COPY utils/fasta_to_txt.py ./V-ALIGN
 WORKDIR /V-ALIGN
 RUN git checkout {}
 
+WORKDIR /V-ALIGN/utils
+RUN chmod u+x genfvs
+
+WORKDIR /V-ALIGN
 RUN make
 RUN mkdir results
 RUN mkdir input_data

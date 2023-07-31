@@ -15,8 +15,8 @@ SERVICE_TEMPLATE = '''
     stdin_open: true 
     tty: true
     build:
-      context: Dockerfiles/{tool}
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: Dockerfiles/{tool}/Dockerfile
     volumes:
       - type: bind
         source: ./results	
@@ -121,9 +121,7 @@ def main():
 				command = COMMAND_TEMPLATE.format(COMMAND=command,
 													LOG='> ' + output_path.split('.gaf')[0] + '.log',
 													TIMING=timing_path)
-				dot_graph_path = graph_path.split('.gfa')[0] + '.visual.dot'									
-				rm_command = f'        rm {dot_graph_path}'
-				file_tmp.write(command + rm_command)
+				file_tmp.write(command)
 
 			elif tool == 'gwfa':
 				command = command_tmp.format(GRAPH=graph_path,
@@ -143,16 +141,20 @@ def main():
 
 			elif tool == 'V-ALIGN':
 				txt_reads_path = '.'.join(reads_path.split('.')[:-1]) + '.txt'
-				convert_cmd = f'        python3 fasta_to_txt.py {txt_reads_path}\n'
-				index_cmd = f'        utils/genfvs {graph_path}\n'
+				convert_cmd = f'        python3 fasta_to_txt.py {reads_path}\n'
+				index_cmd = f'        utils/genfvs {graph_path} > /dev/null\n'
+				index_path = graph_path + '.fvs'
 				command = command_tmp.format(GRAPH=graph_path,
-				 								INDEX=graph_path + '.fvs',
+				 								INDEX=index_path,
 												READS=txt_reads_path,
 												OUTPUT=output_path.split('.gaf')[0] + '.log')
 				command = COMMAND_TEMPLATE.format(COMMAND=command,
 													LOG='> /dev/null',
 													TIMING=timing_path)
-				file_tmp.write(convert_cmd + index_cmd + command)
+				dot_graph_path = graph_path.split('.gfa')[0] + '.visual.dot'									
+				rm_command = f'        rm {dot_graph_path} {txt_reads_path} {index_path}'
+				file_tmp.write(convert_cmd + index_cmd + command + rm_command)
+
 
 			elif tool == 'vg':
 				out_name = output_path.split('_alignments.gaf')[0]
@@ -162,7 +164,7 @@ def main():
 				timing_path_index.insert(-1, 'index')
 				timing_path_index = '_'.join(timing_path_index)
 				index_command = COMMAND_TEMPLATE.format(COMMAND=index_command,
-				      										LOG='',
+				      										LOG='> /dev/null',
 															TIMING=timing_path_index)
 				command = command_tmp['giraffe'].format(INDEX=out_name+'.giraffe.gbz',
 					    									MINIMIZERS=out_name+'.min',
