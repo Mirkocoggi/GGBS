@@ -142,14 +142,17 @@ def main():
 				file_tmp.write(command)
 
 			elif tool == 'V-ALIGN':
+				txt_reads_path = '.'.join(reads_path.split('.')[:-1]) + '.txt'
+				convert_cmd = f'        python3 fasta_to_txt.py {txt_reads_path}\n'
+				index_cmd = f'        utils/genfvs {graph_path}\n'
 				command = command_tmp.format(GRAPH=graph_path,
 				 								INDEX=graph_path + '.fvs',
-												READS=reads_path.split('.f')[0] + '.txt',
+												READS=txt_reads_path,
 												OUTPUT=output_path.split('.gaf')[0] + '.log')
 				command = COMMAND_TEMPLATE.format(COMMAND=command,
 													LOG='> /dev/null',
 													TIMING=timing_path)
-				file_tmp.write(command)
+				file_tmp.write(convert_cmd + index_cmd + command)
 
 			elif tool == 'vg':
 				out_name = output_path.split('_alignments.gaf')[0]
@@ -170,9 +173,13 @@ def main():
 				      								LOG='> ' + output_path,
 													TIMING=timing_path)
 				file_tmp.write(index_command + command)
+	
+	# Print a success message
+	print('\nSuccessfully created docker-compose.yml for the following experiments:')
+	for al in ALIGNMENTS:
+		print(f'\t{al}')
+	print()
 
 				
-
-
 if __name__ == '__main__':
 	main()
