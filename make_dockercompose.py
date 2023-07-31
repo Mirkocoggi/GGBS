@@ -11,18 +11,18 @@ services:
 '''
 
 SERVICE_TEMPLATE = '''
-  {tool}:
+  {tool_lower}:
     stdin_open: true 
     tty: true
     build:
-      context: {tool}
+      context: Dockerfiles/{tool}
       dockerfile: Dockerfile
     volumes:
       - type: bind
-        source: ./RESULTS	
-        target: /{tool}/output
+        source: ./results	
+        target: /{tool}/results
       - type: bind
-        source: ./INPUT_DATA	
+        source: ./input_data	
         target: /{tool}/input_data
     command:
       - /bin/bash 
@@ -52,11 +52,11 @@ def main():
 		config = yaml.safe_load(file)
 
 	# Retrieve the alignments to be executed from INPUT_DATA/TEST
-	DATA_FOLDER = os.path.join('./', 'INPUT_DATA', 'TEST')
+	DATA_FOLDER = os.path.join('./', 'input_data', 'TEST')
 	ALIGNMENTS = [f for f in os.listdir(DATA_FOLDER)]
 
 	# Set the results (output) folder
-	RESULTS = os.path.join('./', 'RESULTS')
+	RESULTS = os.path.join('./', 'results')
 	# Create a folder for the current experiments (named with timestamp)
 	date = datetime.now()
 	date_str = date.strftime("%Y_%m_%d_%H_%M_%S")
@@ -74,7 +74,7 @@ def main():
 	# For each tool
 	for tool in config:
 		# initialize service and command for the specific tool
-		service_tmp = SERVICE_TEMPLATE.format(tool=tool)
+		service_tmp = SERVICE_TEMPLATE.format(tool_lower=tool.lower(), tool=tool)
 		command_tmp = COMMANDS[tool]
 
 		# create the results subfolder for the specific tool
@@ -117,11 +117,13 @@ def main():
 				command = command_tmp.format(GRAPH=graph_path, 
 												READS=reads_path,
 												OUT_DIR=RESULTS_DIR,
-												THREADS=N_THREADS)
+												THREADS=1) # Currently, AStarix works only with 1 thread
 				command = COMMAND_TEMPLATE.format(COMMAND=command,
 													LOG='> ' + output_path.split('.gaf')[0] + '.log',
 													TIMING=timing_path)
-				file_tmp.write(command)
+				dot_graph_path = graph_path.split('.gfa')[0] + '.visual.dot'									
+				rm_command = f'        rm {dot_graph_path}'
+				file_tmp.write(command + rm_command)
 
 			elif tool == 'gwfa':
 				command = command_tmp.format(GRAPH=graph_path,

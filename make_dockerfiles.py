@@ -6,7 +6,7 @@ from pathlib import Path
 # Here are reported the templated Dockerfiles, for each tool
 # If you want to update them, please pay attention in escaping brackets {{}} and backslashes \\
 DOCKERFILES = {
-	'GraphAligner' : '''\
+	'graphaligner' : '''\
 FROM continuumio/miniconda3:latest
 
 RUN apt-get update && apt-get install -y git
@@ -24,7 +24,7 @@ ENV PATH /GraphAligner/bin:$PATH
 
 CMD ["/bin/bash"]
 
-RUN mkdir output
+RUN mkdir results
 RUN mkdir input_data
 
     ''',
@@ -70,7 +70,7 @@ RUN . ./source_me.sh && CXXFLAGS="$(if [ -z "${{TARGETARCH}}" ] || [ "${{TARGETA
 
 ENV PATH /vg/bin:$PATH
 
-RUN mkdir output
+RUN mkdir results
 RUN mkdir input_data
 
     ''',
@@ -88,9 +88,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \\
 	&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/eth-sri/astarix
-RUN git checkout {}
-
 WORKDIR /astarix
+RUN git checkout {}
 
 RUN pip3 install pandas
 
@@ -99,7 +98,7 @@ RUN pip3 install pandas
 RUN make && \\
 	make test
 
-RUN mkdir output
+RUN mkdir results
 RUN mkdir input_data
 
     ''',
@@ -115,12 +114,12 @@ WORKDIR ./gwfa
 RUN git checkout {}
 RUN make
 
-RUN mkdir output
+RUN mkdir results
 RUN mkdir input_data
 
     ''',
 
-    'SGA': '''\
+    'sga': '''\
 FROM gcc:latest
 
 RUN apt-get update && \\
@@ -145,24 +144,23 @@ WORKDIR /SGA/build
 RUN cmake -DSGAL_BUILD_TESTING=ON ..
 RUN make
 RUN ctest
-RUN cp apps ..
+RUN cp -r apps ..
 
 WORKDIR /SGA
-RUN mkdir output
+RUN mkdir results
 RUN mkdir input_data
 
     ''',
 
-    'V-ALIGN': '''\
+    'v-align': '''\
 FROM gcc:latest
 
 RUN git clone https://github.com/tcsatc/V-ALIGN
+WORKDIR /V-ALIGN
 RUN git checkout {}
 
-WORKDIR /V-ALIGN
 RUN make
-
-RUN mkdir output
+RUN mkdir results
 RUN mkdir input_data
 
     '''
@@ -196,7 +194,7 @@ def main():
     for tool in config:
         os.chdir(os.path.join(DOCKERFILES_FOLDER, tool))
         file_tmp = open('Dockerfile', 'w')
-        file_tmp.write(DOCKERFILES[tool].format(config[tool]['version']))
+        file_tmp.write(DOCKERFILES[tool.lower()].format(config[tool]['version']))
         file_tmp.close()
 
     # Print a success message
