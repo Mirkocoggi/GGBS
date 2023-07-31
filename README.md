@@ -52,12 +52,12 @@ The experiments' folders are grouped into two higher-level folders:
 Create the `docker-compose.yml` that builds all the docker images and executes all the experiments.
 Run:
 ```
-        python make_dockercompose.py
+python make_dockercompose.py
 ```
 ### Run the experiments
 Run the experiments with the command:
 ```       
-        docker compose up
+docker compose up
 ``` 
 
 ## Results Collection
