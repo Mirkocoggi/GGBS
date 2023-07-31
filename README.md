@@ -1,3 +1,15 @@
+```
+   █████████    █████████  ███████████   █████████ 
+  ███░░░░░███  ███░░░░░███░░███░░░░░███ ███░░░░░███
+ ███     ░░░  ███     ░░░  ░███    ░███░███    ░░░ 
+░███         ░███          ░██████████ ░░█████████ 
+░███    █████░███    █████ ░███░░░░░███ ░░░░░░░░███
+░░███  ░░███ ░░███  ░░███  ░███    ░███ ███    ░███
+ ░░█████████  ░░█████████  ███████████ ░░█████████ 
+  ░░░░░░░░░    ░░░░░░░░░  ░░░░░░░░░░░   ░░░░░░░░░  
+                                                   
+```                                                 
+                                                   
 # Genome Graphs Benchmark Suite - GGBS
 GGBS is the first implemented Benchmark Suite for sequence-to-graph alignment in the genomic analysis context. It includes multiple state-of-the-art tools and six different genome graphs built with VG Toolkit[^1]. Tools included are:
 
