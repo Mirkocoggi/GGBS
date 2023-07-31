@@ -34,7 +34,7 @@ Create a Dockerfiles folder containing a subfolder for each tool.
 In each subfolder, there will be the respective Dockerfile.
 Run:
 ```
-        python make_dockerfiles.py
+python make_dockerfiles.py
 ```
 
 ### Data Selection
