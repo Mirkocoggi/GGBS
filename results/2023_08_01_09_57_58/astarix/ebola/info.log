@@ -1,0 +1,37 @@
+﻿2023-08-01 09:58:17.989 INFO  [7] [exec_astarix@292]  ------------------------------ 
+2023-08-01 09:58:17.996 INFO  [7] [exec_astarix@293] Starting release/astarix -a astar-seeds -g ./input_data/TEST/ebola/GRAPH/a_ebola_0M.gfa -q ./input_data/TEST/ebola/READS/a_ebola.fa -t 1 --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o ./results/2023_08_01_09_57_58/astarix/ebola align-optimal 
+2023-08-01 09:58:17.996 INFO  [7] [exec_astarix@294]  ------------------------------ 
+2023-08-01 09:58:17.996 INFO  [7] [exec_astarix@295]  sizeof(edge_t) = 12
+2023-08-01 09:58:17.996 INFO  [7] [astarix::read_graph@84] Reading graph ./input_data/TEST/ebola/GRAPH/a_ebola_0M.gfa...
+2023-08-01 09:58:17.996 INFO  [7] [astarix::read_graph@99] [GFA format]
+2023-08-01 09:58:17.996 INFO  [7] [load_gfa@13] GFA loaded with 7 nodes and 6 edges
+2023-08-01 09:58:17.996 INFO  [7] [gfa2graph@27] GFA to Internal graph
+2023-08-01 09:58:17.999 INFO  [7] [read_queries@150] read 101_516_1013_2:0:0_3:0:0_0/1: GGTCTGCATGTACTTGAATTTGCCTTTGAACCTTCTCAAGGCCAGCCTTTTCTGCTACTACCAATTTCGGAAGGAATAGACTTGCAAAGGAGAGGAACTG
+2023-08-01 09:58:17.999 INFO  [7] [read_queries@150] read 101_1085_1603_2:0:0_2:0:0_1/1: ACAAATTTTTTGATCAAATTTCTTCTAATACACCAAGGGATGCACATGGTTGCCGGACATTATGCCAACGATGCTGTGATTACAAATTCAGTGGCTCAAG
+2023-08-01 09:58:17.999 INFO  [7] [read_queries@150] read 101_170_605_1:0:0_3:0:0_2/1: CCTAGGTCTCCGGAGGGGGCAAGGGCATCAGTGTGCTCAGTTGAAAATCCCTTGTCAACATCTAGGCCTTAACACATCACAAGTTCCGCCTTAAACTCTG
+2023-08-01 09:58:17.999 INFO  [7] [read_queries@150] read 101_2367_2933_1:0:0_2:0:0_3/1: GGCTAAGATATTGAGTTACCATTATGGCTATAACTTTTGCTTAACGCTTATTTGCATTAAGACTCAAATTGAACTTTGAAAAACGGCTAGTAATAATAAG
+2023-08-01 09:58:17.999 INFO  [7] [read_queries@150] read 101_348_777_3:0:0_1:0:0_4/1: GAATTAACTTTGATTTTGAACCTGCACACCCAGAGGACTGGAGACTCAACAACCCTAAAGCCTGGGGTAAAACATTAGAAATAGATTAAAGACAAAATGC
+2023-08-01 09:58:17.999 INFO  [7] [read_queries@152]  ...and more reads.
+2023-08-01 09:58:17.999 INFO  [7] [read_queries@156] 10 reads loaded.
+2023-08-01 09:58:17.999 INFO  [7] [add_tree@85]  Nodes of the trie >= 37852
+2023-08-01 09:58:17.999 INFO  [7] [add_tree@86]           Trie depth: 7
+2023-08-01 09:58:17.999 INFO  [7] [add_tree@87]     Fixed trie depth: 1
+2023-08-01 09:58:18.009 INFO  [7] [exec_astarix@347] Mapping init with graph with n=43248 and m=81112
+2023-08-01 09:58:18.009 INFO  [7] [astarix::AlignParams::print@109] Params: 
+2023-08-01 09:58:18.009 INFO  [7] [astarix::AlignParams::print@110]   greedy_match  = 1
+2023-08-01 09:58:18.009 INFO  [7] [astarix::AlignParams::print@111] Edit costs: 
+2023-08-01 09:58:18.009 INFO  [7] [astarix::AlignParams::print@112]   match_cost    = 0
+2023-08-01 09:58:18.009 INFO  [7] [astarix::AlignParams::print@113]   mismatch_cost = 1
+2023-08-01 09:58:18.009 INFO  [7] [astarix::AlignParams::print@114]   ins_cost      = 1
+2023-08-01 09:58:18.009 INFO  [7] [astarix::AlignParams::print@115]   del_cost      = 1
+2023-08-01 09:58:18.009 INFO  [7] [astarix::AlignParams::print@116] Max align cost  = 10000000
+2023-08-01 09:58:18.010 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_516_1013_2:0:0_3:0:0_0/1 A* seeds stats: 10 seeds matching at 7 graph positions over 1690 states(0 repeated)with best heuristic 2 with 10max_indels
+2023-08-01 09:58:18.010 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_1085_1603_2:0:0_2:0:0_1/1 A* seeds stats: 10 seeds matching at 8 graph positions over 1712 states(0 repeated)with best heuristic 2 with 10max_indels
+2023-08-01 09:58:18.011 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_170_605_1:0:0_3:0:0_2/1 A* seeds stats: 10 seeds matching at 9 graph positions over 1980 states(0 repeated)with best heuristic 1 with 10max_indels
+2023-08-01 09:58:18.011 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_2367_2933_1:0:0_2:0:0_3/1 A* seeds stats: 10 seeds matching at 11 graph positions over 2400 states(0 repeated)with best heuristic 0 with 10max_indels
+2023-08-01 09:58:18.012 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_348_777_3:0:0_1:0:0_4/1 A* seeds stats: 10 seeds matching at 7 graph positions over 1464 states(0 repeated)with best heuristic 3 with 10max_indels
+2023-08-01 09:58:18.012 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_1318_1763_1:0:0_1:0:0_5/1 A* seeds stats: 10 seeds matching at 11 graph positions over 2390 states(0 repeated)with best heuristic 1 with 10max_indels
+2023-08-01 09:58:18.013 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_269_775_1:0:0_1:0:0_6/1 A* seeds stats: 10 seeds matching at 10 graph positions over 2414 states(0 repeated)with best heuristic 0 with 10max_indels
+2023-08-01 09:58:18.014 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_906_1482_0:0:0_1:0:0_7/1 A* seeds stats: 10 seeds matching at 10 graph positions over 2288 states(0 repeated)with best heuristic 1 with 10max_indels
+2023-08-01 09:58:18.014 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_1498_1956_5:0:0_1:0:0_8/1 A* seeds stats: 10 seeds matching at 5 graph positions over 1290 states(0 repeated)with best heuristic 4 with 10max_indels
+2023-08-01 09:58:18.014 INFO  [7] [astarix::AStarSeedsWithErrors::log_read_stats@288] 101_72_484_4:1:0_3:0:0_9/1 A* seeds stats: 10 seeds matching at 9 graph positions over 2086 states(0 repeated)with best heuristic 2 with 10max_indels
