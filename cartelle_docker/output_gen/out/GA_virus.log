@@ -1,6 +1,0 @@
-GraphAligner Branch master commit 857cbc1288cb6def69248978639624fc0c6cfa1c 2023-04-15 18:02:35 +0300
-GraphAligner Branch master commit 857cbc1288cb6def69248978639624fc0c6cfa1c 2023-04-15 18:02:35 +0300
-Load graph from input_data/input_data/virus40k.blunt.gfa
-Build alignment graph
-Build minimizer seeder from the graph
-GraphAligner: /opt/conda/envs/GraphAligner/include/sdsl/int_vector.hpp:1351: sdsl::int_vector<<anonymous> >::reference sdsl::int_vector<<anonymous> >::operator[](const size_type&) [with unsigned char t_width = 0; sdsl::int_vector<<anonymous> >::reference = sdsl::int_vector_reference<sdsl::int_vector<0> >; sdsl::int_vector<<anonymous> >::size_type = long unsigned int]: Assertion `idx < this->size()' failed.

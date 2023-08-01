@@ -1,4 +1,0 @@
-read_id,read_length,offset,alignment_length,strand,query_name,query_length,query_start,query_end,target_start,target_end,quality_score,cigar_cs
-r1,51,0,51,+,>101,256,0,50,51,51,60,:51
-r2,45,0,45,+,>103,256,0,44,44,45,60,:4*TG:40
-r3,42,0,42,+,>103,256,0,42,42,42,60,:4-T:38
