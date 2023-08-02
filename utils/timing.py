@@ -41,12 +41,9 @@ def main():
                     RES_DICT[tool][al] = tmp_res
     
     RES_DICT = pd.DataFrame.from_dict(RES_DICT, orient='index')
-    print(RES_DICT)
+    RES_DICT.to_csv(f'{RESULTS}/summary_timing.csv')
 
-
-
-
-
+    print(f'Summary results about execution time are saved in {RESULTS}/summary_timing.csv')
 
 
 if __name__ == '__main__':
