@@ -73,7 +73,12 @@ docker compose up
 ``` 
 
 ## Results Collection
-Results are uploaded in the `results` folder.
+Results are uploaded in the `results` folder, where a subdirectory named with a timestamp is created for each experiment.
+To collect all the execution times, you can generate a `summary_timing.csv` file by running:
+```
+python utils/timing.py results/<timestamp>
+```
+The summary file is generated in `results/<timestamp>/summary_timing.csv`.
 
 [^1]: E. Garrison, J. Sir ́en, A. M. Novak, G. Hickey, J. M. Eizenga, E. T. Dawson, W. Jones, S. Garg, C. Markello, M. F. Lin et al., “Variation graph toolkit improves read mapping by representing genetic variation in the reference,” Nature biotechnology, vol. 36, no. 9, pp. 875–879, 2018
 [^2]: P. Ivanov, B. Bichsel, and M. Vechev, “Fast and optimal sequence-to-graph alignment guided by seeds,” in International Conference on Research in Computational Molecular Biology. Springer, 2022, pp. 306–325
