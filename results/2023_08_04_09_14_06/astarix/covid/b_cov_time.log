@@ -1,0 +1,5 @@
+/bin/bash: line 3:    10 Aborted                 (core dumped) release/astarix align-optimal -a astar-seeds -g ./input_data/TEST/covid/GRAPH/b_cov.gfa -q ./input_data/TEST/covid/READS/FASTA/b_cov_reads_4k_50.fa -t 1 --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o ./results/2023_08_04_09_14_06/astarix/covid > ./results/2023_08_04_09_14_06/astarix/covid/b_cov_alignments.json.log 2>&1
+
+real	74m27.659s
+user	73m37.070s
+sys	0m50.210s

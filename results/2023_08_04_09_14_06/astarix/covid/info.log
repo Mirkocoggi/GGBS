@@ -1,0 +1,18 @@
+﻿2023-08-05 15:41:33.848 INFO  [10] [exec_astarix@292]  ------------------------------ 
+2023-08-05 15:41:33.848 INFO  [10] [exec_astarix@293] Starting release/astarix -a astar-seeds -g ./input_data/TEST/covid/GRAPH/b_cov.gfa -q ./input_data/TEST/covid/READS/FASTA/b_cov_reads_4k_50.fa -t 1 --fixed_trie_depth 1 --seeds_len 10 -G 1 -v 1 -o ./results/2023_08_04_09_14_06/astarix/covid align-optimal 
+2023-08-05 15:41:33.848 INFO  [10] [exec_astarix@294]  ------------------------------ 
+2023-08-05 15:41:33.848 INFO  [10] [exec_astarix@295]  sizeof(edge_t) = 12
+2023-08-05 15:41:33.848 INFO  [10] [astarix::read_graph@84] Reading graph ./input_data/TEST/covid/GRAPH/b_cov.gfa...
+2023-08-05 15:41:33.848 INFO  [10] [astarix::read_graph@99] [GFA format]
+2023-08-05 15:41:33.941 INFO  [10] [load_gfa@13] GFA loaded with 39253 nodes and 39249 edges
+2023-08-05 15:41:33.941 INFO  [10] [gfa2graph@27] GFA to Internal graph
+2023-08-05 15:41:33.965 INFO  [10] [read_queries@150] read 1: CTTGAAGTCCCGCTTGATAATATTGCAAATTTACAAGCTGAAACTGTAAC
+2023-08-05 15:41:33.965 INFO  [10] [read_queries@150] read 2: GGGGTCTGTGGTTTCTAGAGCCAGTGGCCGATTTGCCGATTTGTAGTAAC
+2023-08-05 15:41:33.965 INFO  [10] [read_queries@150] read 3: GGTATTAACAAAAACTGCATCATATGGGTTGCTCTTGAGGGATCCCTTAC
+2023-08-05 15:41:33.965 INFO  [10] [read_queries@150] read 4: GTTTTGTTGTCAAATTACACAATAATGAACTCAGTCCCGTTGTATTACGA
+2023-08-05 15:41:33.965 INFO  [10] [read_queries@150] read 5: GAAGAATCTGCTCCCACACTCATTCAGGTTATTGGCAGAATTCAGTTCCT
+2023-08-05 15:41:33.968 INFO  [10] [read_queries@152]  ...and more reads.
+2023-08-05 15:41:33.968 INFO  [10] [read_queries@156] 4000 reads loaded.
+2023-08-05 15:41:33.968 INFO  [10] [add_tree@85]  Nodes of the trie >= 103554
+2023-08-05 15:41:33.968 INFO  [10] [add_tree@86]           Trie depth: 8
+2023-08-05 15:41:33.968 INFO  [10] [add_tree@87]     Fixed trie depth: 1

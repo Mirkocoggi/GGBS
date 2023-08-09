@@ -1,0 +1,67 @@
+----
+Assert() checks:       OFF
+        verbose:        1
+----
+Loading reference graph... Added reverse complement... done in 0.197038s.
+Loading queries... done in 0.012105s.
+Contructing trie... done in 0.884558s.
+Initializing A* heuristic... done in 1.7e-05s.
+
+ == General parameters and optimizations == 
+             Alignment algo: astar-seeds
+                 Edit costs: 0, 1, 1, 1 (match, subst, ins, del)
+              Greedy match?: true
+                    Threads: 1
+
+ == A* parameters ==
+          seed length: 10 bp
+     skip near crumbs: 1
+
+ == Data ==
+         Original reference: 762652 nodes, 780561 edges
+                       Trie: 336125 nodes, 2387323 edges, depth=10
+  Reference+ReverseRef+Trie: 1861429 nodes, 3948445 edges, density: 0
+                      Reads: 10000 x 99bp, coverage: 1.26832x
+            Avg phred value: 0.00000%
+
+ == Aligning statistics ==
+        Explored rate (avg): 2.25184 states/read_bp
+         States with crumbs: 0.03954%
+            Explored states: 0.00030%
+             Skipped states: 99.96017%
+     Pushed rate (avg, max): 1.34897, 0.00184    [states/bp] (states normalized by query length)
+     Popped rate (avg, max): 0.16232, 0.00009
+             Average popped: 10.00000 from trie (61.60556%) vs 6.23230 from ref (per read)
+Total cost of aligned reads: 0, 0.00000 per read, 0.00000% per letter
+                 Alignments: 10000 unique (100.00000%), 0 ambiguous (0.00000%) and 0 overcost (0.00000%)
+
+ == Heuristic stats (astar-seeds) ==
+        For all reads:
+                            Seeds: 100000 (10.00000 per read)
+                     Seed matches: 589027 (58.90270 per read, 5.89027 per seed)
+               States with crumbs: 298527562 [+0.00000% repeated], (29852.75620 per read)
+                  Heuristic (avg): 0.00000 of potential 10.00000
+
+ == Performance ==
+    Memory:                    measured | estimated
+                   total: 0.12934gb, 100% | -
+               reference: 0.06414gb, 49.59151% | 17.88277%
+                   reads: 0.00000gb, 0.00000% | 0.71287%
+                    trie: 0.05908gb, 45.68058% | 21.59669%
+     equiv. classes opt.: 0.00000gb, 0.00000%
+          A*-memoization: 0.00503gb, 3.89028
+
+   Total wall runtime:    38.80593s
+       reference loading: 0.19704s
+         queries loading: 0.01210s
+          construct trie: 0.88456s
+              precompute: 0.00002s
+       align (wall time): 37.69884s = 265.26014 reads/s = 26.26075 Kbp/s
+
+    Total align cpu time: 37.67279s = 265.44355 reads/s = 26.27891 Kbp/s
+     |          Preprocessing: 94.66203%
+     |               A* query: 2.46767%
+     |           greedy_match: 0.54916%
+     |                  other: 2.32114%
+ DONE
+
