@@ -55,6 +55,7 @@ The folder `input_data` contains genome graphs and sequence reads to be aligned.
 Each alignment experiment has its folder, comprising two subfolders: 
   - `GRAPH`: contains the input graph in GFA format;
   - `READS`: contains the sequence reads in FASTA/Q format.
+
 The experiments' folders are grouped into two higher-level folders:
   - `TEST`: contains the alignments to be executed with the previously selected tools;
   - `IGNORE`: contains alignment experiments that should not be included in the evaluation.
