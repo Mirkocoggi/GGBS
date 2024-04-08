@@ -168,6 +168,30 @@ RUN make
 RUN mkdir results
 RUN mkdir input_data
 
+    ''',
+
+    'gedmap': '''\
+FROM ubuntu:22.04
+
+
+RUN apt-get update && apt-get -y upgrade && apt-get -y install build-essential git cmake g++
+
+WORKDIR /root
+RUN git clone https://github.com/simongog/sdsl-lite.git
+WORKDIR /root/sdsl-lite
+RUN git checkout c32874c
+RUN ./install.sh /usr/local
+
+WORKDIR /
+RUN git clone https://github.com/thomas-buechler-ulm/gedmap.git
+WORKDIR /gedmap
+
+RUN git checkout {}
+RUN make gedmap
+
+RUN mkdir results
+RUN mkdir input_data
+
     '''
 }
 

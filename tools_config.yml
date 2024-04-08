@@ -3,27 +3,31 @@
 # By default, we include all the tools, with the respective versions employed in our experiment.
 # You can indicate a different commit/tag, or completely exclude a tool by commenting the respective lines.
 
-# GraphAligner
+# # GraphAligner
 GraphAligner:
   version: 131a50b
 
-# VG Toolkit
+# # VG Toolkit
 vg:
   version: a7b0f38
 
-# AStarix
+# # AStarix
 astarix:
   version: 23232ee
 
-# GWFA
+# # GWFA
 gwfa:
   version: 0dd07ff
 
-# SGA
+# # SGA
 SGA:
   version: 577a3be
 
+# # GEDMAP
+gedmap:
+  version: dc65d53
+
 # V-ALIGN
-V-ALIGN:
-  version: e4b59a4
+# V-ALIGN:
+#   version: e4b59a4
 

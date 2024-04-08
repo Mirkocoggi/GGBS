@@ -46,6 +46,11 @@ COMMANDS = {
 		'giraffe': 'vg giraffe -Z {INDEX} -m {MINIMIZERS} -d {DIST} -f {READS} -t {THREADS} -o gaf',
 		'map': 'vg map -F {READS} -x {XG_INDEX} -g {GCSA_INDEX} --json'
 	}, 
+	'gedmap': {
+		'parse_gfa': './gedmap parse_gfa {GRAPH} -o {OUTPUT}',
+		'index': './gedmap index {GEDS} -a {ADJ} -o {OUTPUT} -t {THREADS}',
+		'align': './gedmap align {READS} {GEDS} {MINIMIZERS} -2gfa {TOGFA} -o {OUTPUT} -t {THREADS}'
+	},
 }
 
 def main():
@@ -200,6 +205,40 @@ def main():
 				      								LOG='> ' + output_path,
 													TIMING=timing_path)
 				file_tmp.write(index_command + command)
+			
+			elif tool == 'gedmap':
+				out_name = output_path.split('_alignments.gaf')[0]
+				parse_command = command_tmp['parse_gfa'].format(GRAPH=graph_path,
+															OUTPUT=out_name)
+				timing_path_parse = timing_path.split('_')
+				timing_path_parse.insert(-1, 'parse')
+				timing_path_parse = '_'.join(timing_path_parse)
+				parse_command = COMMAND_TEMPLATE.format(TIME_MEM=TIME_MEM,
+															COMMAND=parse_command,
+				      										LOG='> /dev/null',
+															TIMING=timing_path_parse)
+				index_command = command_tmp['index'].format(GEDS=out_name+'.geds',
+																ADJ=out_name+'.adj',
+																OUTPUT=out_name,
+																THREADS=N_THREADS)
+				timing_path_index = timing_path.split('_')
+				timing_path_index.insert(-1, 'index')
+				timing_path_index = '_'.join(timing_path_index)
+				index_command = COMMAND_TEMPLATE.format(TIME_MEM=TIME_MEM,
+															COMMAND=index_command,
+				      										LOG='> /dev/null',
+															TIMING=timing_path_index)
+				command = command_tmp['align'].format(READS=reads_path_fq,
+															GEDS=out_name+'.geds',
+															MINIMIZERS=out_name+'.min',
+															TOGFA=out_name+'.2gfa',
+															OUTPUT=out_name+'.sam',
+															THREADS=N_THREADS)
+				command = COMMAND_TEMPLATE.format(TIME_MEM=TIME_MEM,
+													COMMAND=command,
+				      								LOG='> ' + output_path.split('.gaf')[0] + '.log',
+													TIMING=timing_path)
+				file_tmp.write(parse_command + index_command + command)
 	
 	# Print a success message
 	print('\nSuccessfully created docker-compose.yml for the following experiments:')
