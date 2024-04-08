@@ -1,6 +1,6 @@
 import csv
 
-with open('output_gen/out/f_gwfa_full.log', 'r') as f:
+with open('results/2023_08_04_09_14_06/gwfa/yeast/d_yeast_alignments.json.log', 'r') as f:
     lines = f.readlines()
 
 output = []

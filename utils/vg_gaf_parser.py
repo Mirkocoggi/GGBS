@@ -8,7 +8,7 @@ def sum_numbers_after_colon(cigar_cs):
     return total
 global_score = 0 
 i = 0
-with open('output_gen/out/a_vg_n.gaf', 'r') as f_in:
+with open('results/2023_08_30_10_36_31/vg/yeast/d_yeast_alignments.gaf', 'r') as f_in:
     with open('results/vg_gaf.csv', 'w') as f_out:
         
         for line in f_in:
@@ -19,8 +19,8 @@ with open('output_gen/out/a_vg_n.gaf', 'r') as f_in:
             values = line.strip().split('\t')
             if values[2] == "*":
                 continue
-            value = values[13]
-            cs_values = values[13].split('cs:Z:')
+            value = values[14]
+            cs_values = values[14].split('cs:Z:')
             cs_value = cs_values[1]
             total_score = int(values[1]) - sum_numbers_after_colon(cs_value)
             global_score = global_score + total_score

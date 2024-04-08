@@ -26,8 +26,8 @@ def save_to_fasta(values, fasta_file):
         for value in values:
             file.write(value + '\n')
 
-json_file = 'a_ebola_0M_reads.json'
-fasta_file = 'a_ebola_0M_reads.fa'
+json_file = 'cov_guhi.json'
+fasta_file = '100k_100bp_covid.fa'
 
 values = extract_values(json_file)
 save_to_fasta(values, fasta_file)

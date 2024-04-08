@@ -27,10 +27,13 @@ SERVICE_TEMPLATE = '''
     command:
       - /bin/bash 
       - -c
-      - |        
+      - |
+        apt-get update && apt-get install -y time; 
 '''
 
-COMMAND_TEMPLATE = '        {{ time {COMMAND} {LOG} 2>&1 ; }} 2> {TIMING}\n'
+COMMAND_TEMPLATE = '        {TIME_MEM} {COMMAND} {LOG} 2> {TIMING}\n'
+
+TIME_MEM = '/usr/bin/time -f "Time: %e %E, MAX Memory: %M KB"'
 
 COMMANDS = {
 	'GraphAligner': 'GraphAligner -g {GRAPH} -f {READS} -a {OUTPUT} -x vg -t {THREADS}',
@@ -41,7 +44,7 @@ COMMANDS = {
 	'vg': {
 		'autoindex': 'vg autoindex --workflow giraffe -g {GRAPH} -p {OUTPUT}',
 		'giraffe': 'vg giraffe -Z {INDEX} -m {MINIMIZERS} -d {DIST} -f {READS} -t {THREADS} -o gaf',
-		'map': 'vg map -F {READS} -x {XG_INDEX} -g {GCSA_INDEX} --gaf'
+		'map': 'vg map -F {READS} -x {XG_INDEX} -g {GCSA_INDEX} --json'
 	}, 
 }
 
@@ -99,10 +102,19 @@ def main():
 			dir_tmp = os.path.join(DATA_FOLDER, al)
 			graph = [f for f in os.listdir(os.path.join(dir_tmp, 'GRAPH')) if f.endswith('.gfa')][0]
 			graph_path = os.path.join(dir_tmp,'GRAPH', graph)
-			reads = [f for f in os.listdir(os.path.join(dir_tmp, 'READS')) if 
+			# graph_fvs = [f for f in os.listdir(os.path.join(dir_tmp, 'FVS')) if f.endswith('.fvs')][0]
+			# graph_path_fvs = os.path.join(dir_tmp,'FVS', graph_fvs)
+			reads_fa = [f for f in os.listdir(os.path.join(dir_tmp, 'READS/FASTA')) if 
 				(f.lower().endswith('.fa') or f.lower().endswith('.fq') or 
 				f.lower().endswith('.fasta') or f.lower().endswith('fastq'))][0]
-			reads_path = os.path.join(dir_tmp, 'READS', reads)
+			reads_path_fa = os.path.join(dir_tmp, 'READS/FASTA', reads_fa)
+			reads_fq = [f for f in os.listdir(os.path.join(dir_tmp, 'READS/FASTQ')) if 
+				(f.lower().endswith('.fa') or f.lower().endswith('.fq') or 
+				f.lower().endswith('.fasta') or f.lower().endswith('fastq'))][0]
+			reads_path_fq = os.path.join(dir_tmp, 'READS/FASTQ', reads_fq)
+			# reads_txt = [f for f in os.listdir(os.path.join(dir_tmp, 'TXT')) if 
+			# 	(f.lower().endswith('.txt'))][0]
+			# reads_path_txt = os.path.join(dir_tmp, 'TXT', reads_txt)
 			# set the output files' names and relative paths
 			output_name = graph.split('.gfa')[0] + '_alignments.gaf'
 			timing_name = graph.split('.gfa')[0] + '_time.log'
@@ -113,55 +125,59 @@ def main():
 			# we need specific cases for each tool, it can't be more standardized
 			if tool == 'GraphAligner':
 				command = command_tmp.format(GRAPH=graph_path, 
-												READS=reads_path,
+												READS=reads_path_fa,
 												OUTPUT=output_path,
 												THREADS=N_THREADS)
-				command = COMMAND_TEMPLATE.format(COMMAND=command,
+				command = COMMAND_TEMPLATE.format(TIME_MEM=TIME_MEM,
+													COMMAND=command,
 													LOG='> /dev/null',
 													TIMING=timing_path)
 				file_tmp.write(command)
 
 			elif tool == 'astarix':
 				command = command_tmp.format(GRAPH=graph_path, 
-												READS=reads_path,
+												READS=reads_path_fa,
 												OUT_DIR=RESULTS_SUBDIR,
 												THREADS=1) # Currently, AStarix works only with 1 thread
-				command = COMMAND_TEMPLATE.format(COMMAND=command,
+				command = COMMAND_TEMPLATE.format(TIME_MEM=TIME_MEM,
+													COMMAND=command,
 													LOG='> ' + output_path.split('.gaf')[0] + '.log',
 													TIMING=timing_path)
 				file_tmp.write(command)
 
 			elif tool == 'gwfa':
 				command = command_tmp.format(GRAPH=graph_path,
-				 								READS=reads_path)
-				command = COMMAND_TEMPLATE.format(COMMAND=command,
+				 								READS=reads_path_fa)
+				command = COMMAND_TEMPLATE.format(TIME_MEM=TIME_MEM,
+													COMMAND=command,
 				      								LOG='> ' + output_path.split('.gaf')[0] + '.log',
 													TIMING=timing_path)
 				file_tmp.write(command)
 			
 			elif tool == 'SGA':
 				command = command_tmp.format(GRAPH=graph_path,
-				 								READS=reads_path)
-				command = COMMAND_TEMPLATE.format(COMMAND=command,
+				 								READS=reads_path_fa)
+				command = COMMAND_TEMPLATE.format(TIME_MEM=TIME_MEM,
+													COMMAND=command,
 				      								LOG='> ' + output_path.split('.gaf')[0] + '.log',
 													TIMING=timing_path)
 				file_tmp.write(command)
 
-			elif tool == 'V-ALIGN':
-				txt_reads_path = '.'.join(reads_path.split('.')[:-1]) + '.txt'
-				convert_cmd = f'        python3 fasta_to_txt.py {reads_path}\n'
-				index_cmd = f'        utils/genfvs {graph_path} > /dev/null\n'
-				index_path = graph_path + '.fvs'
-				command = command_tmp.format(GRAPH=graph_path,
-				 								INDEX=index_path,
-												READS=txt_reads_path,
-												OUTPUT=output_path.split('.gaf')[0] + '.log')
-				command = COMMAND_TEMPLATE.format(COMMAND=command,
-													LOG='> /dev/null',
-													TIMING=timing_path)
-				dot_graph_path = graph_path.split('.gfa')[0] + '.visual.dot'									
-				rm_command = f'        rm {dot_graph_path} {txt_reads_path} {index_path}\n'
-				file_tmp.write(convert_cmd + index_cmd + command + rm_command)
+			# elif tool == 'V-ALIGN':
+				# txt_reads_path = '.'.join(reads_path.split('.')[:-1]) + '.txt'
+				# convert_cmd = f'        python3 fasta_to_txt.py {reads_path_fa}\n'
+				# index_cmd = f'        utils/genfvs {graph_path} > /dev/null\n'
+				# index_path = graph_path_fvs
+				# command = command_tmp.format(GRAPH=graph_path,
+				#  								INDEX=index_path,
+				# 								READS=reads_path_txt,
+				# 								OUTPUT=output_path.split('.gaf')[0] + '.log')
+				# command = COMMAND_TEMPLATE.format(COMMAND=command,
+				# 									LOG='> /dev/null',
+				# 									TIMING=timing_path)
+				# dot_graph_path = graph_path.split('.gfa')[0] + '.visual.dot'									
+				# rm_command = f'        rm {dot_graph_path} {reads_path_txt} {index_path}\n'
+				# file_tmp.write(command + rm_command)
 
 			elif tool == 'vg':
 				out_name = output_path.split('_alignments.gaf')[0]
@@ -170,15 +186,17 @@ def main():
 				timing_path_index = timing_path.split('_')
 				timing_path_index.insert(-1, 'index')
 				timing_path_index = '_'.join(timing_path_index)
-				index_command = COMMAND_TEMPLATE.format(COMMAND=index_command,
+				index_command = COMMAND_TEMPLATE.format(TIME_MEM=TIME_MEM,
+															COMMAND=index_command,
 				      										LOG='> /dev/null',
 															TIMING=timing_path_index)
 				command = command_tmp['giraffe'].format(INDEX=out_name+'.giraffe.gbz',
 					    									MINIMIZERS=out_name+'.min',
 															DIST=out_name+'.dist',
-															READS=reads_path,
+															READS=reads_path_fq,
 															THREADS=N_THREADS)
-				command = COMMAND_TEMPLATE.format(COMMAND=command,
+				command = COMMAND_TEMPLATE.format(TIME_MEM=TIME_MEM,
+													COMMAND=command,
 				      								LOG='> ' + output_path,
 													TIMING=timing_path)
 				file_tmp.write(index_command + command)

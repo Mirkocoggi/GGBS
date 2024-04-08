@@ -1,6 +1,6 @@
 import csv
 
-with open('output_gen/out/b_sga.log', 'r') as f:
+with open('results/2023_09_04_08_05_13/SGA/covid/b_cov_alignments.log', 'r') as f:
     lines = f.readlines()
 
 output = []

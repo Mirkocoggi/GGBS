@@ -1,5 +1,5 @@
 input_file = "f_MHC-57_reads.fa"
-output_file = "fastq/f_MHC-57_reads.fq"
+output_file = "f_MHC-57_reads.fq"
 
 with open(input_file, "r") as fa_file, open(output_file, "w") as fq_file:
     for line in fa_file:
@@ -11,4 +11,4 @@ with open(input_file, "r") as fa_file, open(output_file, "w") as fq_file:
             # Write lines with A, C, G, or T
             fq_file.write(line)
             fq_file.write('+\n')
-            fq_file.write('22222222222222222222222222222222222222222222222222\n')
+            fq_file.write('2222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222\n')
