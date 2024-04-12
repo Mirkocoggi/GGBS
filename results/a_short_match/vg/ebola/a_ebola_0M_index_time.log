@@ -1,0 +1,9 @@
+[vg autoindex] Executing command: vg autoindex --workflow giraffe -g ./input_data/TEST/ebola/GRAPH/a_ebola_0M.gfa -p ./results/2024_04_12_13_08_43/vg/ebola/a_ebola_0M
+[IndexRegistry]: Checking for haplotype lines in GFA.
+[IndexRegistry]: Constructing VG graph from GFA input.
+[IndexRegistry]: Constructing XG graph from VG graph.
+[IndexRegistry]: Constructing a greedy path cover GBWT
+[IndexRegistry]: Constructing GBZ using NamedNodeBackTranslation.
+[IndexRegistry]: Constructing distance index for Giraffe.
+[IndexRegistry]: Constructing minimizer index.
+Time: 0.57 0:00.57, MAX Memory: 284176 KB
