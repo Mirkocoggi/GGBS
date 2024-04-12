@@ -1,5 +1,5 @@
-input_file = "f_MHC-57_reads.fa"
-output_file = "f_MHC-57_reads.fq"
+input_file = "d_yeast_reads.fa"
+output_file = "d_yeast_reads.fq"
 
 with open(input_file, "r") as fa_file, open(output_file, "w") as fq_file:
     for line in fa_file:

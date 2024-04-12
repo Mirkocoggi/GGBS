@@ -39,6 +39,7 @@ RUN git clone --recursive https://github.com/vgteam/vg.git
 WORKDIR /vg
 
 RUN git checkout {}
+RUN git submodule update --init --recursive
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN true
@@ -180,7 +181,7 @@ WORKDIR /root
 RUN git clone https://github.com/simongog/sdsl-lite.git
 WORKDIR /root/sdsl-lite
 RUN git checkout c32874c
-RUN ./install.sh /usr/local
+RUN ./install.sh
 
 WORKDIR /
 RUN git clone https://github.com/thomas-buechler-ulm/gedmap.git
