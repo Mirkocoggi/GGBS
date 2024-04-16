@@ -1,0 +1,18 @@
+.......................................................
+GEDMAP ALIGN                                           
+.......................................................
+Search./results/2024_04_12_14_39_14/gedmap/ebola/a_ebola_0M.geds
+in     ./input_data/TEST/ebola/READS/FASTQ/a_100_err.fq
+using./results/2024_04_12_14_39_14/gedmap/ebola/a_ebola_0M.min
+.......................................................
+MAPPING:                                               
+Searched reads                                     1000Searched reads                                     2000Searched reads                                     3000Searched reads                                     4000Searched reads                                     5000Searched reads                                     6000Searched reads                                     7000Searched reads                                     8000Searched reads                                     9000Searched reads                                    10000Searched reads                                    10000
+Reads per second per thread                     4222.97
+Searches                                          10000
+Mapped reads                                       9819
+Results                                            9819
+.......................................................
+Time for loading:                                0.00 s
+Time for mapping:                                0.30 s
+Time for overall:                                0.30 s
+.......................................................
