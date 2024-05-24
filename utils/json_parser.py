@@ -28,8 +28,8 @@ def save_to_csv(values, csv_file):
         writer.writerow(['node_id', 'offset'])
         writer.writerows(values)
 
-json_file = 'b_cov_reads_err4k_50.json'
-csv_file = 'outputcov.csv'
+json_file = 'zip_reads_folder/dati_fa_ggbs/long_err/f_1k_err_fixed.json'
+csv_file = 'zip_reads_folder/dati_fa_ggbs/long_err/position_csv/f_1k_err.csv'
 
 values = extract_values(json_file)
 save_to_csv(values, csv_file)
