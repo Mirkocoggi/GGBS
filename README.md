@@ -43,7 +43,7 @@ cd GGBS
 
 ### Create the dockerfiles
 
-Create a Dockerfiles folder containing a subfolder for each tool.
+The first step is to create a Dockerfiles folder containing a subfolder for each tool.
 In each subfolder, there will be the respective Dockerfile.
 Run:
 ```
