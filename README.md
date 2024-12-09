@@ -19,6 +19,7 @@ GGBS is the first implemented Benchmark Suite for sequence-to-graph alignment in
 - SGA [^5]
 - V-ALign [^6]
 - VG Toolkit Giraffe [^7]
+- GEDMAP [^8]
 
 Select which tools and version you want to use in `tools_config.yml`.
 
@@ -88,4 +89,5 @@ The summary file is generated in `results/<timestamp>/summary_timing.csv`.
 [^5]: C. Jain, H. Zhang, Y. Gao, and S. Aluru, “On the complexity of sequence-to-graph alignment,” Journal of Computational Biology, vol. 27, no. 4, pp. 640–654, 2020.
 [^6]: V. N. S. Kavya, K. Tayal, R. Srinivasan, and N. Sivadasan, “Sequence alignment on directed graphs,” Journal of Computational Biology, vol. 26, no. 1, pp. 53–67, 2019.
 [^7]: J. Sir ́en, J. Monlong, X. Chang, A. M. Novak, J. M. Eizenga, C. Markello, J. A. Sibbesen, G. Hickey, P.-C. Chang, A. Carroll et al., “Genotyping common, large structural variations in 5,202 genomes using pangenomes, the giraffe mapper, and the vg toolkit,” BioRxiv, pp. 2020–12, 2020
+[^8]: T. B¨uchler, J. Olbrich, and E. Ohlebusch, “Efficient short read mapping to a pangenome that is represented by a graph of ed strings,” Bioinformatics, vol. 39, no. 5, p. btad320, 2023.
 
